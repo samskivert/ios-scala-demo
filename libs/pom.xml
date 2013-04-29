@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.samskivert</groupId>
+    <artifactId>iscala-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>iscala-libs</artifactId>
+  <packaging>dll</packaging>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.scala-lang</groupId>
+      <artifactId>scala-library</artifactId>
+      <version>${scala.version}</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <!-- omit the version from the dll name so it matches the name we use in the project -->
+    <!-- either IKVM or Mono gets pissy if the file names do not match up; hackery! -->
+    <finalName>${project.artifactId}</finalName>
+    <plugins>
+      <plugin>
+        <groupId>com.samskivert</groupId>
+        <artifactId>ikvm-maven-plugin</artifactId>
+        <version>1.2-SNAPSHOT</version>
+        <!-- this lets Maven know that we define 'packaging: dll' -->
+        <extensions>true</extensions>
+        <configuration>
+          <ikvmArgs>
+            <ikvmArg>-debug</ikvmArg>
+            <ikvmArg>-removeassertions</ikvmArg>
+          </ikvmArgs>
+          <dlls>
+          </dlls>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
