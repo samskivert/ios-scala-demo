@@ -37,6 +37,7 @@
         <!-- this lets Maven know that we define 'packaging: dll' -->
         <extensions>true</extensions>
         <configuration>
+          <ikvmPath>${user.home}/projects/ikvm-monotouch</ikvmPath>
           <ikvmArgs>
             <ikvmArg>-debug</ikvmArg>
             <ikvmArg>-removeassertions</ikvmArg>
