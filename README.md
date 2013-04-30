@@ -14,10 +14,10 @@ To build and run this demo app, you will need the following:
 
   * [Maven]
   * [Scala]
-  * [ikvm-monotouch] (building it is hard, so just get the [pre-built version])
+  * [ikvm-monotouch] \(building it is hard, so just get the [pre-built version])
   * [Xamarin.Studio]
 
-You need to edit `app/pom.xml` and set `ivkmPath` to the path in which you installed
+You need to edit `app/pom.xml` and set `ivkmPath` to the path at which you installed
 `ikvm-monotouch`. Otherwise no manual tweaks should be needed.
 
 With all of the above installed, you can build the app thusly (on a Mac, you can't develop iOS apps
@@ -85,12 +85,12 @@ variable degree of cumbersome translation.
 ### Don't use JDK classes
 
 [ikvm-monotouch] uses a hacked up version of OpenJDK where 90% of the crap from the JDK was excised
-to get things working with the limited CLR profile made available by MonoTouch. This means you flat
-out cannot use things like `java.net` or most of `java.nio`, and there's no bundled implementation
-of CORBA or LDAP or any of the other two dozen random bits of enterprise crap that Sun/Oracle has
+to get things working with the limited CLR profile made available by MonoTouch. This means you
+cannot use things like `java.net` or most of `java.nio`, and there's no bundled implementation of
+CORBA or LDAP or any of the other two dozen random bits of enterprise crap that Sun/Oracle has
 piled in there over the years. By extension, anything in Scala that builds on those bits is not
 going to work. You're probably not planning on writing an enterprise web server for the iPhone, but
-you should still bear in mind that you're not in Kansas any more.
+you should still bear in mind that you're not in Kansas anymore.
 
 Some of the JDK stuff *does* work, but that still doesn't mean that you should use it. Using
 something like `java.io.File` means that you're using IKVM's implementation of Java files on top of
@@ -102,6 +102,13 @@ performance.
 Hopefully you were not thinking you would be able to use AWT and/or Swing. Even if it did work,
 which it doesn't, Steve Jobs would likely come back from the dead just to smack you.
 
+The Scala collections library works, and that (and all the fun things you can do with Scala
+yourself) is pretty much the extent of what you can bring over from the Java world. Everything else
+should be built on the iOS APIs directly. Of course, if you're extremely motivated, you can improve
+my [ikvm-monotouch] port and make more Java stuff work out of the box, but you'll still be running
+everything through two layers of emulation, on under-powered, power-starved mobile CPUs. Think of
+the children.
+
 ### iOS API docs
 
 You can often figure out what you want to do by either looking at the [Objective-C documentation]
@@ -111,9 +118,10 @@ directly (or reading about how someone did something in Objective-C) and then lo
 ## Licensing
 
 As far as I can tell (IANAL), the entire tool-chain involved here is AOK for developing apps and
-selling them on the app store. A number of parties have shipped commercial games based on this
-toolchain (minus Scala). Xamarin.Studio is a commercial product, so you have to cough up for that,
-but everything else is open source and licensed sufficiently liberally for commercial use.
+selling them on the app store. A number of parties (myself included) have shipped commercial games
+based on this toolchain (minus Scala). Xamarin.Studio is a commercial product, so you have to cough
+up for that, but everything else is open source and licensed sufficiently liberally for commercial
+use.
 
 ## Questioning
 
@@ -133,3 +141,4 @@ I'm on [scala-tools], so feel free to post there with questions or whatnot.
 [Objective-C documentation]: http://developer.apple.com/library/ios/navigation/
 [MonoTouch API docs]: http://docs.go-mono.com/
 [Jeroen's blog posts]: http://weblog.ikvm.net/
+[scala-tools]: https://groups.google.com/forum/?fromgroups=#!forum/scala-tools
