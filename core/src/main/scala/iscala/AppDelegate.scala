@@ -37,15 +37,9 @@ class AppDelegate extends UIApplicationDelegate {
     true
   }
 
-  private def action (body : => Unit) = {
-    // IKVM generates stub inner interfaces lacking a static attribute; scalac is confused by this
-    // and thinks the interface requires an outer this pointer even though it doesn't; this hack
-    // works around this issue until IKVM, or scalac, or both can be fixed
-    val hack :NSAction = null
-    new NSAction(new hack.Method() {
-      def Invoke = body
-    })
-  }
+  private def action (body : => Unit) =new NSAction(new NSAction.Method() {
+    def Invoke = body
+  })
 
   private lazy val window = new UIWindow(UIScreen.get_MainScreen.get_Bounds)
 }
