@@ -85,6 +85,7 @@
           <options>
             <option>-dontwarn scala.**</option>
             <option>-dontnote scala.**</option>
+            <option>-keepattributes *Annotation*</option>
             <option>-keep public class iscala.** { *; }</option>
           </options>
           <libs>
