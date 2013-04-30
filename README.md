@@ -12,6 +12,11 @@ used to allow one to write iOS applications in Scala. Here's a quick breakdown o
 
 ![Obligatory screenshot](screenshot.png)
 
+## See the code!
+
+Here's the [Scala code](blob/master/core/src/main/scala/iscala/AppDelegate.scala) that is
+responsible for the above app.
+
 ## Building
 
 To build and run this demo app, you will need the following:
