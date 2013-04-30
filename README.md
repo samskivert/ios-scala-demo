@@ -51,6 +51,16 @@ Build using SBT or something less slow than Maven. You'll need to implement the 
 what my [ikvm-maven-plugin] does, but if you just run "mvn package -X" you'll see the big fat
 command line it puts together at the end, and you can work it out from there.
 
+You might also want to investigate using IKVM's "on the fly" bytecode converter to enable a more
+efficient edit/compile/debug cycle. Currently, to test your app, you have to run the Scala code
+through Proguard every time you want to run it in the iOS simulator (otherwise MonoTouch will
+require ages to grind through all of `scala-library.jar`). However, MonoTouch uses the normal Mono
+VM when running code in the simulator, so you can do things there (like on-the-fly byte-code
+compilation) that you can't do in an app that's built for the device. Thus it is probably possible
+to wire up IKVM's on-the-fly Java bytecode to CLR bytecode translator, plus the existing Mono VM,
+to enable a development environment where you can incrementally recompile Scala classes and simply
+restart your simulated app to incorporate the new code.
+
 ### Learn about IKVM's magic
 
 Learn about how IKVM translates Java bytecode to C# bytecode, because you're going to see the iOS
@@ -58,21 +68,10 @@ APIs through the lens of C#-ness. Xamarin did a great job of converting the Obje
 C# APIs, which are easy for a C# programmer to use. You will now be using those C# APIs "as seen"
 from Java, and what's worse, it's Java as seen from Scala, which is not always smooth sailing.
 
-For example, IKVM translates C# delegates into a pair of classes `Foo` and `Foo.Method` which are
-intended to be used thusly:
-
-```java
-SomeMethod(new SomeDelegate(new SomeDelegate.Method() {
-  public void Invoke () {
-    // do your thang!
-  }
-});
-```
-
-But `scalac` seems to be confused by `Method` and thinks that `SomeMethod` wants a
-`SomeDelegate#Method` but of course you can't create one of those. Perhaps someone with greater
-Scala-fu than mine can sort this one out. In the demo app, I worked around it by creating a Java
-helper class which creates the delegate adapter.
+For example, IKVM generates synthetic inner interfaces for C# delegates as well as C# attributes,
+but it fails to mark them static. `javac` doesn't care because it knows that all inner-interfaces
+are implicitly static, but `scalac` thinks they require an outer-this pointer to be constructed
+which requires hackery (shown in the example code) to work around.
 
 Unfortunately there's not a comprehensive list of all the things IKVM does to map between the JVM's
 view of the world and the CLR's view of the world. You kind of have to plow through ten plus years
