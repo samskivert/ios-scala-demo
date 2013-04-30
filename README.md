@@ -3,21 +3,25 @@
 This is an extremely simple demo app that chiefly exists to show the complex plumbing that can be
 used to allow one to write iOS applications in Scala. Here's a quick breakdown of the process:
 
-  # Code is written in [Scala], and compiled with scalac.
-  # Java bytecodes (for app, scala-library.jar and any other third party jars) are converted from
+  * Code is written in [Scala], and compiled with scalac.
+  * Java bytecodes (for app, scala-library.jar and any other third party jars) are converted from
     Java bytecode to CLR bytecode by [IVKM].
-  # CLR bytecodes are compiled by [Xamarin.iOS] (nee MonoTouch) into ARM x86 assembly.
+  * CLR bytecodes are compiled by [Xamarin.iOS] (nee MonoTouch) into ARM x86 assembly.
 
 ## Building
 
 To build and run this demo app, you will need the following:
 
-  # [Maven]
-  # [Scala]
-  # [ikvm-monotouch] (building it is hard, so just get the [pre-built version])
-  # [Xamarin.Studio]
+  * [Maven]
+  * [Scala]
+  * [ikvm-monotouch] (building it is hard, so just get the [pre-built version])
+  * [Xamarin.Studio]
 
-With all of the above installed, you can build the app thusly:
+You need to edit `app/pom.xml` and set `ivkmPath` to the path in which you installed
+`ikvm-monotouch`. Otherwise no manual tweaks should be needed.
+
+With all of the above installed, you can build the app thusly (on a Mac, you can't develop iOS apps
+on any other platform):
 
     % mvn clean package
     % open app/iscala.sln
@@ -61,10 +65,15 @@ But `scalac` seems to be confused by `Method` and thinks that `SomeMethod` wants
 Scala-fu than mine can sort this one out. In the demo app, I worked around it by creating a Java
 helper class which creates the delegate adapter.
 
+Unfortunately there's not a comprehensive list of all the things IKVM does to map between the JVM's
+view of the world and the CLR's view of the world. You kind of have to plow through ten plus years
+of [Jeroen's blog posts] to find whatever particular thing you're looking for. Of course, Google is
+your friend here.
+
 In a rare case of "two wrongs do make a right", using C# generics from Scala by way of IKVM is
 horribly unpleasant, but the iOS API originates from Objective-C code in the first place, so
-Xamarin rarely makes use of C# generics in their C# version of the API. So you rarely run into that
-unpleasantry.
+Xamarin rarely makes use of C# generics in their C# version of the API. So you don't often run into
+that unpleasantry.
 
 ### You can use Interface Builder
 
@@ -123,3 +132,4 @@ I'm on [scala-tools], so feel free to post there with questions or whatnot.
 [MonoTouch UI docs]: http://docs.xamarin.com/guides/ios/user_interface
 [Objective-C documentation]: http://developer.apple.com/library/ios/navigation/
 [MonoTouch API docs]: http://docs.go-mono.com/
+[Jeroen's blog posts]: http://weblog.ikvm.net/
