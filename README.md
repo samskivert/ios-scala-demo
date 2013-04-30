@@ -5,8 +5,8 @@ used to allow one to write iOS applications in Scala. Here's a quick breakdown o
 
   * Code is written in [Scala], and compiled with scalac.
   * Java bytecodes (for app, scala-library.jar and any other third party jars) are converted from
-    Java bytecode to CLR bytecode by [IVKM].
-  * CLR bytecodes are compiled by [Xamarin.iOS] (nee MonoTouch) into ARM x86 assembly.
+    Java bytecode to CLR bytecode by [IKVM].
+  * CLR bytecodes are compiled by [Xamarin.iOS] \(nee MonoTouch) into ARM x86 assembly.
 
 ## Building
 
