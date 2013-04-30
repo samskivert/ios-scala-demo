@@ -14,7 +14,7 @@ used to allow one to write iOS applications in Scala. Here's a quick breakdown o
 
 ## See the code!
 
-Here's the [Scala code](blob/master/core/src/main/scala/iscala/AppDelegate.scala) that is
+Here's the [Scala code](core/src/main/scala/iscala/AppDelegate.scala) that is
 responsible for the above app.
 
 ## Building
