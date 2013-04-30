@@ -22,7 +22,7 @@
       <groupId>com.xamarin.monotouch</groupId>
       <artifactId>monotouch-dialog</artifactId>
       <version>${monotouch.version}</version>
-      <scope>provided</scope>
+      <optional>true</optional>
     </dependency>
   </dependencies>
 
@@ -48,6 +48,50 @@
             <goals><goal>compile</goal></goals>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <!-- TODO: return to stock groupId when they make it work with 4.5+: com.pyx4me -->
+        <groupId>com.github.wvengen</groupId>
+        <artifactId>proguard-maven-plugin</artifactId>
+        <version>2.0.6</version>
+        <executions>
+         <execution>
+           <phase>package</phase>
+           <goals><goal>proguard</goal></goals>
+         </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>net.sf.proguard</groupId>
+            <artifactId>proguard-base</artifactId>
+            <version>4.8</version>
+            <scope>runtime</scope>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <proguardVersion>4.8</proguardVersion>
+          <outputDirectory>${project.build.directory}</outputDirectory>
+          <outjar>${project.build.finalName}.jar</outjar>
+          <injar>${project.build.finalName}.jar</injar>
+          <assembly>
+            <inclusions>
+              <inclusion>
+                <groupId>org.scala-lang</groupId>
+                <artifactId>scala-library</artifactId>
+              </inclusion>
+            </inclusions>
+          </assembly>
+          <obfuscate>true</obfuscate>
+          <options>
+            <option>-dontwarn scala.**</option>
+            <option>-dontnote scala.**</option>
+            <option>-keep public class iscala.** { *; }</option>
+          </options>
+          <libs>
+            <lib>${java.home}/lib/rt.jar</lib>
+          </libs>
+          <addMavenDescriptor>false</addMavenDescriptor>
+        </configuration>
       </plugin>
     </plugins>
   </build>

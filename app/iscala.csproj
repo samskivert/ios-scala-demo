@@ -33,7 +33,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
-    <MtouchLink>None</MtouchLink>
+    <MtouchLink>Full</MtouchLink>
     <MtouchI18n />
     <MtouchArch>ARMv7</MtouchArch>
   </PropertyGroup>
@@ -59,9 +59,9 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
     <CodesignKey>iPhone Developer</CodesignKey>
-    <MtouchLink>Full</MtouchLink>
     <MtouchI18n />
     <MtouchArch>ARMv7</MtouchArch>
+    <MtouchLink>None</MtouchLink>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
     <DebugType>none</DebugType>
@@ -91,9 +91,6 @@
     <Reference Include="monotouch" />
     <Reference Include="IKVM.OpenJDK.Core">
       <HintPath>bin\IKVM.OpenJDK.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="iscala-libs">
-      <HintPath>bin\iscala-libs.dll</HintPath>
     </Reference>
     <Reference Include="iscala-app">
       <HintPath>bin\iscala-app.dll</HintPath>

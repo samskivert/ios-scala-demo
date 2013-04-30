@@ -16,12 +16,6 @@
       <artifactId>iscala-core</artifactId>
       <version>${project.version}</version>
     </dependency>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>iscala-libs</artifactId>
-      <version>${project.version}</version>
-      <type>dll</type>
-    </dependency>
   </dependencies>
 
   <build>

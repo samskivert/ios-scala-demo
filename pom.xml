@@ -51,7 +51,6 @@
   </repositories>
 
   <modules>
-    <module>libs</module>
     <module>core</module>
     <module>app</module>
   </modules>
