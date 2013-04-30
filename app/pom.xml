@@ -50,6 +50,21 @@
           <copyDllDepends>true</copyDllDepends>
         </configuration>
       </plugin>
+      <plugin>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>2.5</version>
+        <configuration>
+          <filesets>
+            <!-- clean out the MonoTouch obj directory -->
+            <fileset>
+              <directory>obj</directory>
+              <includes>
+                <include>**</include>
+              </includes>
+            </fileset>
+          </filesets>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 </project>
