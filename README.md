@@ -8,6 +8,10 @@ used to allow one to write iOS applications in Scala. Here's a quick breakdown o
     Java bytecode to CLR bytecode by [IKVM].
   * CLR bytecodes are compiled by [Xamarin.iOS] \(nee MonoTouch) into ARM x86 assembly.
 
+## Obligatory Screenshot
+
+![Obligatory screenshot](screenshot.png)
+
 ## Building
 
 To build and run this demo app, you will need the following:
